@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Special</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* POPUP */
+.popup-overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+    z-index:1000;
+}
+
+.popup-box{
+    width:100%;
+    max-width:400px;
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    text-align:center;
+    position:relative;
+}
+
+.popup-box img{
+    width:100%;
+}
+
+.popup-content{
+    padding:20px;
+}
+
+.popup-content h2{
+    color:#ff1493;
+    margin-bottom:10px;
+}
+
+.popup-content p{
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+/* Buttons */
+.popup-buttons{
+    position:relative;
+    height:60px;
+}
+
+.popup-buttons button{
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    font-size:14px;
+    cursor:pointer;
+    background:#ff69b4;
+    color:white;
+    position:absolute;
+    transition:0.3s;
+}
+
+.yes-btn{
+    left:20%;
+}
+
+.no-btn{
+    right:20%;
+}
+
+/* SALE PAGE */
+.sale-page{
+    display:none;
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+}
+
+.sale-page video{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:translate(-50%, -50%);
+    z-index:-1;
+}
+
+.sale-overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+}
+
+.sale-content{
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    padding:20px;
+}
+
+.sale-content h1{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.sale-content p{
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+.shop-btn{
+    padding:12px 30px;
+    border:none;
+    border-radius:25px;
+    background:#ff69b4;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+@media(min-width:768px){
+    .sale-content h1{ font-size:48px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-box">
+        <img src="WhatsApp Image 2026-02-11 at 23.50.40 (1).jpeg">
+
+        <div class="popup-content">
+            <h2>Will you be my VALENTINE ❤️</h2>
+            <p>Please say yessss 🥺💕</p>
+
+            <div class="popup-buttons">
+                <button class="yes-btn" onclick="showSale()">YES 💖</button>
+                <button class="no-btn" id="noBtn">NO 😜</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SALE PAGE -->
+<div class="sale-page" id="salePage">
+
+    <video id="video1" loop playsinline>
+        <source src="dude3.mp4" type="video/mp4">
+    </video>
+
+    <video id="video2" loop playsinline style="display:none;">
+        <source src="dude2.mp4" type="video/mp4">
+    </video>
+
+    <div class="sale-overlay"></div>
+
+    <div class="sale-content">
+        <h1>HAPPY VALENTINE DAY 💕❤️</h1>
+        <p>You are the most special person in my life 💖</p>
+
+        <button class="shop-btn" onclick="playSecondVideo()">
+            Will you be mine 💘
+        </button>
+    </div>
+
+</div>
+
+<script>
+// SHOW SALE
+function showSale(){
+    document.getElementById("popup").style.display="none";
+    document.getElementById("salePage").style.display="block";
+    document.getElementById("video1").play();
+}
+
+// PLAY SECOND VIDEO
+function playSecondVideo(){
+    var v1 = document.getElementById("video1");
+    var v2 = document.getElementById("video2");
+
+    v1.pause();
+    v1.style.display="none";
+
+    v2.style.display="block";
+    v2.play();
+}
+
+// MOVE NO BUTTON
+var noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+function moveButton(){
+    var popupBox = document.querySelector(".popup-box");
+
+    var maxX = popupBox.clientWidth - noBtn.offsetWidth;
+    var maxY = 200;
+
+    var randomX = Math.floor(Math.random() * maxX);
+    var randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+}
+</script>
+
+</body>
+</html>
